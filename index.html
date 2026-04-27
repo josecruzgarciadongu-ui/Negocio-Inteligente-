@@ -1858,7 +1858,7 @@ function guardarGasto() {
     const g=gastos.find(x=>x.id===id);
     if(g){g.nombre=nombre;g.monto=monto;g.tipo=tipoGasto;g.dias=dias;}
   } else {
-    gastos.push({id:uid(), negId:negActivo, nombre, monto, tipo:tipoGasto, dias, fecha:fechaHoy()});
+    gastos.push({id:uid(),  nombre, monto, tipo:tipoGasto, dias, fecha:fechaHoy()});
   }
 
   guardar('np_gastos',gastos);
@@ -1903,7 +1903,7 @@ function guardarIngreso() {
     const i=ingresos.find(x=>x.id===id);
     if(i){i.nombre=nombre;i.monto=monto;}
   } else {
-    ingresos.push({id:uid(), negId:negActivo, nombre, monto, fecha:fechaHoy()});
+    ingresos.push({id:uid(), nombre, monto, fecha:fechaHoy()});
   }
 
   guardar('np_ingresos',ingresos);
