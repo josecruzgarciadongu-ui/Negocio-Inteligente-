@@ -1512,7 +1512,6 @@ function renderResumen() {
   if (!negActivo) {
     document.getElementById('resumen-contenido').innerHTML = `<div class="empty"><div class="eico">🏪</div><div class="etxt">Selecciona un negocio primero.</div></div>`;
     return;
-renderHistorial();
   }
   // ---- DATOS DIARIOS ----
   const ing    = totalIngresos(negActivo);
@@ -1551,6 +1550,7 @@ renderHistorial();
     : '<div style="color:var(--texto3);font-size:13px;padding:8px 0">Sin gastos operativos registrados</div>';
 
   document.getElementById('resumen-contenido').innerHTML = `
+  renderHistorial();
     <!-- ======== BLOQUE DIARIO ======== -->
     <div class="bloque-periodo">
       <div class="periodo-header">
