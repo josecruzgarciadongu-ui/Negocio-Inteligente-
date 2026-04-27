@@ -1508,8 +1508,8 @@ function renderResumen() {
   if (!negActivo) {
     document.getElementById('resumen-contenido').innerHTML = `<div class="empty"><div class="eico">🏪</div><div class="etxt">Selecciona un negocio primero.</div></div>`;
     return;
-  }
 renderHistorial();
+  }
   // ---- DATOS DIARIOS ----
   const ing    = totalIngresos(negActivo);
   const gsDia  = gastosDiarios(negActivo);
@@ -1547,7 +1547,6 @@ renderHistorial();
     : '<div style="color:var(--texto3);font-size:13px;padding:8px 0">Sin gastos operativos registrados</div>';
 
   document.getElementById('resumen-contenido').innerHTML = `
-
     <!-- ======== BLOQUE DIARIO ======== -->
     <div class="bloque-periodo">
       <div class="periodo-header">
@@ -1651,7 +1650,88 @@ renderHistorial();
     </div>
   `;
 }
+// ================= HISTORIAL =================
 
+function agruparPorFecha() {
+  const mapa = {};
+
+  ingresos.forEach(i => {
+    if (!mapa[i.fecha]) mapa[i.fecha] = {ing:0, gas:0};
+    mapa[i.fecha].ing += i.monto;
+  });
+
+  gastos.forEach(g => {
+    if (!mapa[g.fecha]) mapa[g.fecha] = {ing:0, gas:0};
+    mapa[g.fecha].gas += g.monto;
+  });
+
+  return mapa;
+}
+
+function renderHistorial() {
+  const data = agruparPorFecha();
+
+  const html = Object.keys(data).sort().reverse().map(fecha => {
+    const d = data[fecha];
+    const gan = d.ing - d.gas;
+
+    return `
+      <div class="card" onclick="verDetalleDia('${fecha}')">
+        <div><b>📅 ${fecha}</b></div>
+        <div>💵 Ingresos: ${fmt(d.ing)}</div>
+        <div>💸 Gastos: ${fmt(d.gas)}</div>
+        <div>📊 Ganancia: ${fmt(gan)}</div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('historial').innerHTML = html;
+}
+
+// ================= DETALLE =================
+
+function verDetalleDia(fecha) {
+
+  const ing = ingresos.filter(i => i.fecha === fecha && i.negId === negActivo);
+  const gas = gastos.filter(g => g.fecha === fecha && g.negId === negActivo);
+
+  const html = `
+    <div class="card">
+      <div style="font-weight:800;font-size:16px;margin-bottom:10px">
+        📅 ${fecha}
+      </div>
+
+      <div style="margin-bottom:10px">
+        <b>💵 Ingresos</b>
+        ${ing.length ? ing.map(i=>`
+          <div style="font-size:13px;margin-top:4px">
+            + ${i.nombre} → ${fmt(i.monto)}
+          </div>
+        `).join('') : '<div style="font-size:13px;color:gray">Sin ingresos</div>'}
+      </div>
+
+      <div>
+        <b>💸 Gastos</b>
+        ${gas.length ? gas.map(g=>`
+          <div style="font-size:13px;margin-top:4px">
+            - ${g.nombre} → ${fmt(g.monto)}
+          </div>
+        `).join('') : '<div style="font-size:13px;color:gray">Sin gastos</div>'}
+      </div>
+
+      <button class="btn btn-gris btn-full" onclick="cerrarDetalle()">
+        Cerrar
+      </button>
+    </div>
+  `;
+
+  document.getElementById('detalle-dia').innerHTML = html;
+  document.getElementById('overlay-detalle').classList.add('open');
+}
+
+function cerrarDetalle() {
+  document.getElementById('overlay-detalle').classList.remove('open');
+   }
 /* =========================================================
    FORM: NEGOCIO
 ========================================================= */
