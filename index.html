@@ -788,4 +788,1181 @@ html, body {
 .periodo-stat.ing .ps-val { color: var(--verde); }
 .periodo-stat.gas  { border-color: rgba(192,57,43,.25); }
 .periodo-stat.gas .ps-val { color: var(--rojo); }
-.periodo-stat.gan.pos { border-color: var(--verde); bac
+.periodo-stat.gan.pos { border-color: var(--verde); background: var(--verde-bg); }
+.periodo-stat.gan.pos .ps-val { color: var(--verde); }
+.periodo-stat.gan.neg { border-color: var(--rojo);  background: var(--rojo-bg); }
+.periodo-stat.gan.neg .ps-val { color: var(--rojo); }
+.periodo-stat.gan.neu .ps-val { color: var(--texto2); }
+
+.periodo-resultado {
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.periodo-resultado.pos { background: linear-gradient(90deg,#051A13,#071F17); border: 1.5px solid var(--verde); }
+.periodo-resultado.neg { background: linear-gradient(90deg,#1C0808,#200A0A); border: 1.5px solid var(--rojo); }
+.periodo-resultado.neu { background: var(--gris3); border: 1.5px solid var(--linea); }
+
+.pr-left .pr-lbl { font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+.periodo-resultado.pos .pr-lbl { color: var(--verde); }
+.periodo-resultado.neg .pr-lbl { color: var(--rojo); }
+.periodo-resultado.neu .pr-lbl { color: var(--texto2); }
+.pr-left .pr-estado { font-size: 12px; color: var(--texto2); margin-top: 3px; }
+
+.pr-val {
+  font-family: var(--font-h);
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1;
+}
+.periodo-resultado.pos .pr-val { color: var(--verde); }
+.periodo-resultado.neg .pr-val { color: var(--rojo); }
+.periodo-resultado.neu .pr-val { color: var(--texto2); }
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ====== HEADER ====== -->
+  <div class="header" id="main-header">
+    <div class="header-top">
+      <div class="app-title">ðŸ’° Negocio Pro</div>
+      <div class="header-fecha" id="hdr-fecha"></div>
+    </div>
+    <div class="negocio-activo" id="hdr-negocio">
+      <span>â†‘</span> Selecciona un negocio
+    </div>
+    <div class="ganancia-header">
+      <div class="ganancia-lbl">HOY:</div>
+      <div class="ganancia-val neu" id="hdr-ganancia">$0.00</div>
+    </div>
+  </div>
+
+  <!-- ====== CONTENT ====== -->
+  <div class="content" id="main-content">
+
+    <!-- PAGE: NEGOCIOS -->
+    <div class="page active" id="page-negocios">
+      <div class="sec-title">
+        Mis Negocios
+        <button class="btn btn-rojo btn-sm" onclick="abrirFormNegocio()">ï¼‹ Nuevo</button>
+      </div>
+      <div id="lista-negocios"></div>
+    </div>
+
+    <!-- PAGE: GASTOS -->
+    <div class="page" id="page-gastos">
+      <div id="gastos-total-bar"></div>
+      <div class="sec-title">
+        Gastos
+        <button class="btn btn-rojo btn-sm" onclick="abrirFormGasto()">ï¼‹ Agregar</button>
+      </div>
+      <div id="lista-gastos"></div>
+    </div>
+
+    <!-- PAGE: INGRESOS -->
+    <div class="page" id="page-ingresos">
+      <div id="ingresos-total-bar"></div>
+      <div class="sec-title">
+        Ingresos
+        <button class="btn btn-verde btn-sm" onclick="abrirFormIngreso()">ï¼‹ Agregar</button>
+      </div>
+      <div id="lista-ingresos"></div>
+    </div>
+
+    <!-- PAGE: RESUMEN -->
+    <div class="page" id="page-resumen">
+      <div class="sec-title">Resumen del dÃ­a</div>
+      <div id="resumen-contenido"></div>
+      <!-- BACKUP -->
+      <div class="divider"></div>
+      <div class="sec-title" style="font-size:16px">âš™ï¸ Datos</div>
+      <div class="backup-row">
+        <button class="btn btn-gris btn-full" onclick="exportarDatos()">ðŸ“¤ Exportar</button>
+        <button class="btn btn-gris btn-full" onclick="document.getElementById('import-file').click()">ðŸ“¥ Importar</button>
+      </div>
+      <input type="file" id="import-file" accept=".json" style="display:none" onchange="importarDatos(event)">
+      <div style="margin-top:10px">
+        <button class="btn btn-warn btn-full" onclick="pedirNuevoDia()">ðŸŒ… Nuevo DÃ­a (limpiar ingresos y gastos del dÃ­a)</button>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+</div><!-- /app -->
+
+<!-- ====== BOTTOM NAV â€” FIXED, OUTSIDE #app ====== -->
+<nav class="bottom-nav" id="bottom-nav">
+  <button class="bnav active" id="bnav-negocios" onclick="cambiarTab('negocios')">
+    <span class="bico">ðŸª</span>
+    <span class="blbl">Negocios</span>
+  </button>
+  <button class="bnav" id="bnav-gastos" onclick="cambiarTab('gastos')">
+    <span class="bico">ðŸ’¸</span>
+    <span class="blbl">Gastos</span>
+  </button>
+  <button class="bnav" id="bnav-ingresos" onclick="cambiarTab('ingresos')">
+    <span class="bico">ðŸ’µ</span>
+    <span class="blbl">Ingresos</span>
+  </button>
+  <button class="bnav" id="bnav-resumen" onclick="cambiarTab('resumen')">
+    <span class="bico">ðŸ“Š</span>
+    <span class="blbl">Resumen</span>
+  </button>
+</nav>
+
+<!-- ============================================================
+     MODALES / SHEETS
+============================================================ -->
+
+<!-- Negocio -->
+<div class="overlay" id="ov-negocio">
+  <div class="sheet">
+    <div class="sheet-title" id="sh-neg-title">ðŸª Nuevo Negocio</div>
+    <div class="form-group">
+      <label class="form-lbl">Nombre del negocio</label>
+      <input class="form-input" id="fn-nombre" placeholder="Ej: Carne Asada" maxlength="30" autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label class="form-lbl">Tipo / descripciÃ³n</label>
+      <input class="form-input" id="fn-tipo" placeholder="Ej: Fin de semana" maxlength="30" autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label class="form-lbl">Emoji</label>
+      <input class="form-input" id="fn-emoji" placeholder="ðŸ¥©" maxlength="4">
+    </div>
+    <input type="hidden" id="fn-id">
+    <div class="btn-row">
+      <button class="btn btn-gris" onclick="cerrarOverlays()">Cancelar</button>
+      <button class="btn btn-rojo" onclick="guardarNegocio()">âœ“ Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Gasto -->
+<div class="overlay" id="ov-gasto">
+  <div class="sheet">
+    <div class="sheet-title" id="sh-gas-title">ðŸ’¸ Agregar Gasto</div>
+    <div class="form-group">
+      <label class="form-lbl">Nombre del gasto</label>
+      <input class="form-input" id="fg-nombre" placeholder="Ej: Carne, Gas, Tortillasâ€¦" maxlength="40" autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label class="form-lbl">Monto total ($)</label>
+      <input class="form-input" id="fg-monto" type="number" min="0" step="0.01" placeholder="0.00">
+    </div>
+    <div class="form-group">
+      <label class="form-lbl">Tipo de gasto</label>
+      <div class="tipo-chips" id="chips-tipo">
+        <button class="tipo-chip selected-diario" data-tipo="diario"   onclick="selTipo('diario')">ðŸ“… Diario</button>
+        <button class="tipo-chip"                 data-tipo="duracion" onclick="selTipo('duracion')">ðŸ“† Por duraciÃ³n</button>
+        <button class="tipo-chip"                 data-tipo="extra"    onclick="selTipo('extra')">âš¡ Extra</button>
+      </div>
+    </div>
+    <div class="form-group" id="fg-dias-wrap" style="display:none">
+      <label class="form-lbl">DuraciÃ³n (dÃ­as)</label>
+      <input class="form-input" id="fg-dias" type="number" min="1" step="1" placeholder="Ej: 7">
+    </div>
+    <input type="hidden" id="fg-id">
+    <div class="btn-row">
+      <button class="btn btn-gris" onclick="cerrarOverlays()">Cancelar</button>
+      <button class="btn btn-rojo" onclick="guardarGasto()">âœ“ Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Ingreso -->
+<div class="overlay" id="ov-ingreso">
+  <div class="sheet verde">
+    <div class="sheet-title" id="sh-ing-title">ðŸ’µ Agregar Ingreso</div>
+    <div class="form-group">
+      <label class="form-lbl">DescripciÃ³n</label>
+      <input class="form-input" id="fi-nombre" placeholder="Ej: Venta del dÃ­a, Pedidoâ€¦" maxlength="40" autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label class="form-lbl">Monto ($)</label>
+      <input class="form-input" id="fi-monto" type="number" min="0" step="0.01" placeholder="0.00">
+    </div>
+    <input type="hidden" id="fi-id">
+    <div class="btn-row">
+      <button class="btn btn-gris" onclick="cerrarOverlays()">Cancelar</button>
+      <button class="btn btn-verde" onclick="guardarIngreso()">âœ“ Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm -->
+<div class="overlay" id="ov-confirm">
+  <div class="sheet">
+    <div class="sheet-title" id="conf-title">Â¿Confirmar?</div>
+    <p id="conf-body" style="font-size:14px;color:var(--texto2);margin-bottom:18px;line-height:1.5"></p>
+    <div class="btn-row">
+      <button class="btn btn-gris" onclick="cerrarOverlays()">Cancelar</button>
+      <button class="btn btn-rojo" id="conf-ok">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+'use strict';
+
+/* =========================================================
+   LAYOUT HELPER â€” declared early so header updater can use it
+========================================================= */
+function ajustarLayout() {
+  const hdr = document.getElementById('main-header');
+  const content = document.getElementById('main-content');
+  if (hdr && content) {
+    const h = hdr.getBoundingClientRect().height;
+    content.style.top = h + 'px';
+  }
+}
+
+/* =========================================================
+   HELPERS
+========================================================= */
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+function fmt(n) { return '$' + Number(n||0).toLocaleString('es-MX',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function hoy()  { return new Date().toLocaleDateString('es-MX',{weekday:'long',day:'numeric',month:'long'}); }
+
+// Returns today as YYYY-MM-DD string
+function fechaHoy() {
+  const d = new Date();
+  return d.getFullYear() + '-' +
+    String(d.getMonth()+1).padStart(2,'0') + '-' +
+    String(d.getDate()).padStart(2,'0');
+}
+
+// Returns array of last N date strings YYYY-MM-DD (including today), oldest first
+function ultimas7Fechas() {
+  const arr = [];
+  for (let i=6; i>=0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    arr.push(
+      d.getFullYear() + '-' +
+      String(d.getMonth()+1).padStart(2,'0') + '-' +
+      String(d.getDate()).padStart(2,'0')
+    );
+  }
+  return arr;
+}
+
+// Short human-readable date range label
+function rangoSemana() {
+  const dias = ultimas7Fechas();
+  const fmt2 = s => {
+    const [y,m,d] = s.split('-');
+    return `${d}/${m}`;
+  };
+  return `${fmt2(dias[0])} â€“ ${fmt2(dias[6])}`;
+}
+
+function cargar(k,def) {
+  try { const v=localStorage.getItem(k); return v?JSON.parse(v):def; } catch{ return def; }
+}
+function guardar(k,v) { try{localStorage.setItem(k,JSON.stringify(v));}catch{} }
+
+function toast(msg,dur=2200) {
+  const el=document.getElementById('toast');
+  el.textContent=msg; el.classList.add('show');
+  clearTimeout(el._t);
+  el._t=setTimeout(()=>el.classList.remove('show'),dur);
+}
+
+/* =========================================================
+   ESTADO
+========================================================= */
+let negocios  = cargar('np_negocios', []);
+let gastos    = cargar('np_gastos',   []);   // [{id,negId,nombre,monto,tipo,dias}]
+let ingresos  = cargar('np_ingresos', []);   // [{id,negId,nombre,monto}]
+let negActivo = cargar('np_activo',   null);
+
+// Asegura que haya negocios demo si es primera vez
+if (negocios.length === 0) {
+  negocios = [
+    {id:uid(), nombre:'Carne Asada', tipo:'Fin de semana', emoji:'ðŸ¥©'},
+    {id:uid(), nombre:'CarnicerÃ­a',  tipo:'Diario',        emoji:'ðŸ”ª'},
+  ];
+  guardar('np_negocios', negocios);
+}
+
+// Selecciona el primero si no hay activo o no existe
+if (!negActivo || !negocios.find(n=>n.id===negActivo)) {
+  negActivo = negocios[0]?.id || null;
+  guardar('np_activo', negActivo);
+}
+
+/* =========================================================
+   CÃLCULOS
+========================================================= */
+function gastosDiarios(negId) {
+  return gastos
+    .filter(g=>g.negId===negId && g.tipo==='diario')
+    .reduce((s,g)=>s+g.monto,0);
+}
+
+function gastosDuracion(negId) {
+  return gastos
+    .filter(g=>g.negId===negId && g.tipo==='duracion')
+    .reduce((s,g)=>s+(g.monto/(g.dias||1)),0);
+}
+
+function gastosExtra(negId) {
+  return gastos
+    .filter(g=>g.negId===negId && g.tipo==='extra')
+    .reduce((s,g)=>s+g.monto,0);
+}
+
+function totalGastosOperativos(negId) {
+  return gastosDiarios(negId) + gastosDuracion(negId);
+}
+
+function totalIngresos(negId, fecha) {
+  const f = fecha || fechaHoy();
+  return ingresos
+    .filter(i=>i.negId===negId && (i.fecha||fechaHoy())===f)
+    .reduce((s,i)=>s+i.monto,0);
+}
+
+function ganancia(negId) {
+  return totalIngresos(negId) - totalGastosOperativos(negId);
+}
+
+/* =========================================================
+   MIGRACIÃ“N â€” asignar fecha a registros sin ella
+========================================================= */
+function migrarFechas() {
+  const hd = fechaHoy();
+  let cambio = false;
+  gastos.forEach(g  => { if (!g.fecha) { g.fecha = hd; cambio = true; } });
+  ingresos.forEach(i => { if (!i.fecha) { i.fecha = hd; cambio = true; } });
+  if (cambio) {
+    guardar('np_gastos',   gastos);
+    guardar('np_ingresos', ingresos);
+  }
+}
+
+/* =========================================================
+   CÃLCULOS SEMANALES
+========================================================= */
+
+// Ingresos de los Ãºltimos 7 dÃ­as para un negocio
+function ingresosSemanales(negId) {
+  const fechas = new Set(ultimas7Fechas());
+  return ingresos
+    .filter(i => i.negId === negId && fechas.has(i.fecha || fechaHoy()))
+    .reduce((s,i) => s + i.monto, 0);
+}
+
+// Gastos diarios de los Ãºltimos 7 dÃ­as (solo tipo=diario, con fecha en rango)
+function gastosDiariosSemanales(negId) {
+  const fechas = new Set(ultimas7Fechas());
+  return gastos
+    .filter(g => g.negId===negId && g.tipo==='diario' && fechas.has(g.fecha || fechaHoy()))
+    .reduce((s,g) => s + g.monto, 0);
+}
+
+// Gastos por duraciÃ³n: cada uno aporta (monto/dias) Ã— cant_dÃ­as_en_ventana
+// Un gasto de duraciÃ³n cubre desde su fecha de creaciÃ³n durante g.dias dÃ­as.
+// Para la ventana semanal, contamos cuÃ¡ntos de esos dÃ­as caen en los Ãºltimos 7.
+function gastosDuracionSemanales(negId) {
+  const ventana = ultimas7Fechas(); // ["2025-01-01", ..., "2025-01-07"]
+  const ventanaSet = new Set(ventana);
+
+  return gastos
+    .filter(g => g.negId===negId && g.tipo==='duracion')
+    .reduce((sum, g) => {
+      const costoPorDia = g.monto / (g.dias || 1);
+      const inicio = g.fecha || fechaHoy();
+
+      // Genera todas las fechas que cubre este gasto
+      let diasEnVentana = 0;
+      for (let i=0; i < (g.dias||1); i++) {
+        const d = new Date(inicio + 'T00:00:00');
+        d.setDate(d.getDate() + i);
+        const key = d.getFullYear() + '-' +
+          String(d.getMonth()+1).padStart(2,'0') + '-' +
+          String(d.getDate()).padStart(2,'0');
+        if (ventanaSet.has(key)) diasEnVentana++;
+      }
+      return sum + costoPorDia * diasEnVentana;
+    }, 0);
+}
+
+// Gastos operativos semanales = diarios en rango + duraciÃ³n prorrateada
+function gastosOperativosSemanales(negId) {
+  return gastosDiariosSemanales(negId) + gastosDuracionSemanales(negId);
+}
+
+// Ganancia semanal
+function gananciaSemanales(negId) {
+  return ingresosSemanales(negId) - gastosOperativosSemanales(negId);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+function actualizarHeader() {
+  document.getElementById('hdr-fecha').textContent = hoy();
+
+  const neg = negocios.find(n=>n.id===negActivo);
+  if (!neg) {
+    document.getElementById('hdr-negocio').innerHTML = '<span>â†‘</span> Selecciona un negocio';
+    document.getElementById('hdr-ganancia').textContent = '$0.00';
+    document.getElementById('hdr-ganancia').className = 'ganancia-val neu';
+    setTimeout(ajustarLayout, 50);
+    return;
+  }
+
+  document.getElementById('hdr-negocio').textContent = `${neg.emoji} ${neg.nombre}`;
+
+  const g = ganancia(negActivo);
+  const el = document.getElementById('hdr-ganancia');
+  el.textContent = fmt(g);
+  el.className = 'ganancia-val ' + (g>0?'pos':g<0?'neg':'neu');
+  setTimeout(ajustarLayout, 50);
+}
+
+/* =========================================================
+   TAB NAVIGATION
+========================================================= */
+let tabActual = 'negocios';
+
+function cambiarTab(tab) {
+  tabActual = tab;
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.bnav').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+tab).classList.add('active');
+  document.getElementById('bnav-'+tab).classList.add('active');
+  renderTab(tab);
+}
+
+function renderTab(tab) {
+  if (tab==='negocios')  renderNegocios();
+  if (tab==='gastos')    renderGastos();
+  if (tab==='ingresos')  renderIngresos();
+  if (tab==='resumen')   renderResumen();
+  actualizarHeader();
+}
+
+/* =========================================================
+   RENDER: NEGOCIOS
+========================================================= */
+function renderNegocios() {
+  const wrap = document.getElementById('lista-negocios');
+
+  if (negocios.length===0) {
+    wrap.innerHTML = `<div class="empty"><div class="eico">ðŸª</div><div class="etxt">Sin negocios aÃºn.<br>Crea tu primero.</div></div>`;
+    return;
+  }
+
+  wrap.innerHTML = negocios.map(neg=>{
+    const g = ganancia(neg.id);
+    const isActive = neg.id === negActivo;
+    const cls = g>0?'pos':g<0?'neg':'neu';
+    return `
+      <div class="negocio-card${isActive?' selected':''}" onclick="selNegocio('${neg.id}')">
+        <div class="neg-left">
+          <div class="neg-emoji">${neg.emoji||'ðŸª'}</div>
+          <div class="neg-nombre">${esc(neg.nombre)}</div>
+          <div class="neg-tipo">${esc(neg.tipo||'')}</div>
+          <div class="neg-actions">
+            <button class="btn btn-gris btn-sm" onclick="event.stopPropagation();editarNegocio('${neg.id}')">âœï¸</button>
+            <button class="btn btn-gris btn-sm" onclick="event.stopPropagation();pedirEliminarNeg('${neg.id}')">ðŸ—‘ï¸</button>
+          </div>
+        </div>
+        <div class="neg-right">
+          <div class="neg-gan-lbl">GANANCIA HOY</div>
+          <div class="neg-gan-val ${cls}">${fmt(g)}</div>
+          <div style="font-size:11px;color:var(--texto3);margin-top:4px">
+            In: ${fmt(totalIngresos(neg.id))} | Gs: ${fmt(totalGastosOperativos(neg.id))}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function selNegocio(id) {
+  negActivo = id;
+  guardar('np_activo', negActivo);
+  renderNegocios();
+  actualizarHeader();
+  toast('âœ… Negocio seleccionado');
+}
+
+/* =========================================================
+   RENDER: GASTOS
+========================================================= */
+function renderGastos() {
+  if (!negActivo) {
+    document.getElementById('gastos-total-bar').innerHTML = '';
+    document.getElementById('lista-gastos').innerHTML = `<div class="empty"><div class="eico">ðŸª</div><div class="etxt">Selecciona un negocio primero.</div></div>`;
+    return;
+  }
+
+  const totalD = gastosDiarios(negActivo);
+  const totalDur = gastosDuracion(negActivo);
+  const totalE = gastosExtra(negActivo);
+  const totalOp = totalD + totalDur;
+
+  document.getElementById('gastos-total-bar').innerHTML = `
+    <div class="stat-grid" style="margin-bottom:10px">
+      <div class="stat-box">
+        <div class="stat-lbl">Gastos operativos</div>
+        <div class="stat-val rojo">${fmt(totalOp)}</div>
+        <div style="font-size:10px;color:var(--texto3);margin-top:3px">Diarios + DuraciÃ³n</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-lbl">Gastos extra</div>
+        <div class="stat-val amarillo">${fmt(totalE)}</div>
+        <div style="font-size:10px;color:var(--texto3);margin-top:3px">No afectan ganancia</div>
+      </div>
+    </div>
+  `;
+
+  const mis = gastos.filter(g=>g.negId===negActivo);
+
+  if (mis.length===0) {
+    document.getElementById('lista-gastos').innerHTML = `<div class="empty"><div class="eico">ðŸ’¸</div><div class="etxt">Sin gastos registrados.</div></div>`;
+    return;
+  }
+
+  document.getElementById('lista-gastos').innerHTML = mis.map(g=>{
+    const diario = g.tipo==='duracion' ? g.monto/(g.dias||1) : (g.tipo==='diario'?g.monto:0);
+    const tipoLabel = g.tipo==='diario'?'ðŸ“… Diario':g.tipo==='duracion'?`ðŸ“† ${g.dias}d`:'âš¡ Extra';
+    const colorClass = g.tipo==='extra'?'extra':'gasto';
+    return `
+      <div class="item-card">
+        <div class="item-ico ${colorClass}">${g.tipo==='extra'?'âš¡':g.tipo==='duracion'?'ðŸ“†':'ðŸ“…'}</div>
+        <div class="item-info">
+          <div class="item-nombre">${esc(g.nombre)}</div>
+          <div class="item-meta">${tipoLabel}${g.tipo==='duracion'?` Â· $${(diario).toFixed(2)}/dÃ­a`:''} Â· ${g.fecha||fechaHoy()}</div>
+        </div>
+        <div>
+          <div class="item-monto ${colorClass}">${fmt(g.monto)}</div>
+          <div style="display:flex;gap:5px;margin-top:5px;justify-content:flex-end">
+            <button class="ico-btn" onclick="editarGasto('${g.id}')">âœï¸</button>
+            <button class="ico-btn" onclick="pedirEliminarItem('gasto','${g.id}','${esc(g.nombre)}')">ðŸ—‘ï¸</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+/* =========================================================
+   RENDER: INGRESOS
+========================================================= */
+function renderIngresos() {
+  if (!negActivo) {
+    document.getElementById('ingresos-total-bar').innerHTML = '';
+    document.getElementById('lista-ingresos').innerHTML = `<div class="empty"><div class="eico">ðŸª</div><div class="etxt">Selecciona un negocio primero.</div></div>`;
+    return;
+  }
+
+  const hd = fechaHoy();
+  const total = totalIngresos(negActivo, hd);
+
+  document.getElementById('ingresos-total-bar').innerHTML = `
+    <div class="total-bar ingresos" style="margin-bottom:10px">
+      <div>
+        <div class="tb-lbl">Total ingresos hoy</div>
+        <div style="font-size:11px;color:var(--verde);opacity:.7;margin-top:2px">${ingresos.filter(i=>i.negId===negActivo&&(i.fecha||hd)===hd).length} registro(s)</div>
+      </div>
+      <div class="tb-val">${fmt(total)}</div>
+    </div>
+  `;
+
+  const mis = ingresos.filter(i=>i.negId===negActivo&&(i.fecha||hd)===hd);
+
+  if (mis.length===0) {
+    document.getElementById('lista-ingresos').innerHTML = `<div class="empty"><div class="eico">ðŸ’µ</div><div class="etxt">Sin ingresos hoy.<br>Â¡Agrega tu primera venta!</div></div>`;
+    return;
+  }
+
+  document.getElementById('lista-ingresos').innerHTML = mis.map(i=>`
+    <div class="item-card">
+      <div class="item-ico ingreso">ðŸ’µ</div>
+      <div class="item-info">
+        <div class="item-nombre">${esc(i.nombre)}</div>
+        <div class="item-meta">ðŸ“… ${i.fecha || hd}</div>
+      </div>
+      <div>
+        <div class="item-monto ingreso">${fmt(i.monto)}</div>
+        <div style="display:flex;gap:5px;margin-top:5px;justify-content:flex-end">
+          <button class="ico-btn" onclick="editarIngreso('${i.id}')">âœï¸</button>
+          <button class="ico-btn" onclick="pedirEliminarItem('ingreso','${i.id}','${esc(i.nombre)}')">ðŸ—‘ï¸</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* =========================================================
+   RENDER: HISTORIAL
+========================================================= */
+function renderHistorialHTML() {
+  if (!negActivo) return '';
+  const historial = cargar('np_historial', []);
+  const miHist = historial.filter(h=>h.negId===negActivo);
+
+  if (miHist.length === 0) {
+    return `<div style="color:var(--texto3);font-size:13px;padding:8px 0">Sin historial aÃºn. Al presionar "Nuevo DÃ­a" se guardarÃ¡ el registro de hoy.</div>`;
+  }
+
+  return miHist.map((h, idx) => {
+    const gan = h.ganancia;
+    const cls = gan>0?'var(--verde)':gan<0?'var(--rojo)':'var(--texto2)';
+    const sign = gan>=0?'':'- ';
+    const fechaDisplay = h.fecha.split('-').reverse().join('/');
+    const detId = 'hist-det-' + idx;
+    const ingRows = (h.ingresos||[]).map(i=>`
+      <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--linea)">
+        <span style="font-size:13px;color:var(--texto2)">${esc(i.nombre)}</span>
+        <span style="font-size:13px;font-weight:700;color:var(--verde)">${fmt(i.monto)}</span>
+      </div>
+    `).join('');
+    return `
+      <div class="card" style="margin-bottom:8px;cursor:pointer" onclick="toggleHistDet('${detId}')">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-weight:700;font-size:14px">${fechaDisplay}</div>
+            <div style="font-size:11px;color:var(--texto3);margin-top:2px">Ingresos: ${fmt(h.totalIng)} Â· Gastos: ${fmt(h.totalGastos)}</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-family:var(--font-h);font-size:20px;font-weight:900;color:${cls}">${sign}${fmt(Math.abs(gan))}</div>
+            <div style="font-size:10px;color:var(--texto3);margin-top:2px">ver detalle â–¼</div>
+          </div>
+        </div>
+        <div id="${detId}" style="display:none;margin-top:10px;border-top:1px solid var(--linea);padding-top:8px">
+          <div style="font-size:11px;font-weight:700;color:var(--texto3);margin-bottom:6px;text-transform:uppercase">Ingresos del dÃ­a</div>
+          ${ingRows || '<div style="color:var(--texto3);font-size:12px">Sin registros</div>'}
+          <div style="display:flex;justify-content:space-between;margin-top:8px;padding-top:6px;border-top:1px solid var(--linea)">
+            <span style="font-size:12px;font-weight:700;color:var(--texto2)">TOTAL INGRESOS</span>
+            <span style="font-size:14px;font-weight:800;color:var(--verde)">${fmt(h.totalIng)}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:4px">
+            <span style="font-size:12px;font-weight:700;color:var(--texto2)">GASTOS OPERATIVOS</span>
+            <span style="font-size:14px;font-weight:800;color:var(--rojo)">${fmt(h.totalGastos)}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:4px">
+            <span style="font-size:12px;font-weight:700;color:var(--texto2)">${gan>=0?'GANANCIA':'PÃ‰RDIDA'}</span>
+            <span style="font-size:16px;font-weight:900;color:${cls}">${sign}${fmt(Math.abs(gan))}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleHistDet(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+/* =========================================================
+   RENDER: RESUMEN
+========================================================= */
+function renderResumen() {
+  if (!negActivo) {
+    document.getElementById('resumen-contenido').innerHTML = `<div class="empty"><div class="eico">ðŸª</div><div class="etxt">Selecciona un negocio primero.</div></div>`;
+    return;
+  }
+
+  // ---- DATOS DIARIOS ----
+  const hd    = fechaHoy();
+  const ing    = totalIngresos(negActivo, hd);
+  const gsDia  = gastosDiarios(negActivo);
+  const gsDur  = gastosDuracion(negActivo);
+  const gsOp   = gsDia + gsDur;
+  const gsEx   = gastosExtra(negActivo);
+  const gan    = ing - gsOp;
+  const margen = ing>0 ? Math.min(100, Math.max(0,(gan/ing)*100)) : 0;
+  const clsDia = gan>0?'pos':gan<0?'neg':'neu';
+  const estadoDia = gan>0?'ðŸŸ¢ Vas ganando hoy':gan<0?'ðŸ”´ EstÃ¡s en pÃ©rdida':'âšª Sin movimientos';
+
+  // ---- DATOS SEMANALES ----
+  const ingSem  = ingresosSemanales(negActivo);
+  const gsOpSem = gastosOperativosSemanales(negActivo);
+  const ganSem  = gananciaSemanales(negActivo);
+  const clsSem  = ganSem>0?'pos':ganSem<0?'neg':'neu';
+  const estadoSem = ganSem>0?'ðŸŸ¢ Semana positiva':ganSem<0?'ðŸ”´ Semana en pÃ©rdida':'âšª Sin movimientos';
+  const margenSem = ingSem>0 ? Math.min(100,Math.max(0,(ganSem/ingSem)*100)) : 0;
+
+  // ---- BREAKDOWN DE GASTOS ----
+  const misGastos = gastos.filter(g=>g.negId===negActivo && g.tipo!=='extra');
+  const breakHTML = misGastos.length>0
+    ? misGastos.map(g=>{
+        const montoMostrar = g.tipo==='duracion' ? g.monto/(g.dias||1) : g.monto;
+        return `
+          <div class="breakdown-item">
+            <div>
+              <div class="breakdown-nombre">${esc(g.nombre)}</div>
+              <span class="breakdown-tipo ${g.tipo==='diario'?'bt-diario':'bt-duracion'}">${g.tipo==='diario'?'Diario':`${g.dias}d`}</span>
+            </div>
+            <div class="breakdown-monto" style="color:var(--rojo)">${fmt(montoMostrar)}/dÃ­a</div>
+          </div>
+        `;
+      }).join('')
+    : '<div style="color:var(--texto3);font-size:13px;padding:8px 0">Sin gastos operativos registrados</div>';
+
+  document.getElementById('resumen-contenido').innerHTML = `
+
+    <!-- ======== BLOQUE DIARIO ======== -->
+    <div class="bloque-periodo">
+      <div class="periodo-header">
+        <span class="periodo-badge dia">ðŸ“… Hoy</span>
+        <span class="periodo-fecha-rango">${new Date().toLocaleDateString('es-MX',{weekday:'long',day:'numeric',month:'short'})}</span>
+      </div>
+
+      <div class="periodo-grid">
+        <div class="periodo-stat ing">
+          <div class="ps-lbl">Ingresos</div>
+          <div class="ps-val">${fmt(ing)}</div>
+        </div>
+        <div class="periodo-stat gas">
+          <div class="ps-lbl">Gastos</div>
+          <div class="ps-val">${fmt(gsOp)}</div>
+        </div>
+        <div class="periodo-stat gan ${clsDia}">
+          <div class="ps-lbl">${gan>=0?'Ganancia':'PÃ©rdida'}</div>
+          <div class="ps-val">${fmt(Math.abs(gan))}</div>
+        </div>
+      </div>
+
+      <div class="periodo-resultado ${clsDia}">
+        <div class="pr-left">
+          <div class="pr-lbl">${gan>=0?'GANANCIA DEL DÃA':'PÃ‰RDIDA DEL DÃA'}</div>
+          <div class="pr-estado">${estadoDia}</div>
+        </div>
+        <div class="pr-val">${fmt(Math.abs(gan))}</div>
+      </div>
+
+      ${ing>0?`
+      <div class="card" style="margin-top:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:11px;font-weight:700;color:var(--texto3);letter-spacing:.5px">MARGEN DIARIO</span>
+          <span style="font-size:17px;font-weight:800;color:${margen>30?'var(--verde)':margen>10?'var(--amarillo)':'var(--rojo)'}">${margen.toFixed(1)}%</span>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-bar" style="width:${margen}%;background:${margen>30?'var(--verde)':margen>10?'var(--amarillo)':'var(--rojo)'}"></div>
+        </div>
+      </div>`:''}
+
+      ${gsEx>0?`
+      <div class="total-bar extras" style="margin-top:8px">
+        <div class="tb-lbl">âš¡ Extras del dÃ­a (info)</div>
+        <div class="tb-val">${fmt(gsEx)}</div>
+      </div>`:''}
+    </div>
+
+    <div class="divider" style="margin:6px 0 16px"></div>
+
+    <!-- ======== BLOQUE SEMANAL ======== -->
+    <div class="bloque-periodo">
+      <div class="periodo-header">
+        <span class="periodo-badge semana">ðŸ“† Semana</span>
+        <span class="periodo-fecha-rango">Ãšltimos 7 dÃ­as Â· ${rangoSemana()}</span>
+      </div>
+
+      <div class="periodo-grid">
+        <div class="periodo-stat ing">
+          <div class="ps-lbl">Ingresos</div>
+          <div class="ps-val">${fmt(ingSem)}</div>
+        </div>
+        <div class="periodo-stat gas">
+          <div class="ps-lbl">Gastos</div>
+          <div class="ps-val">${fmt(gsOpSem)}</div>
+        </div>
+        <div class="periodo-stat gan ${clsSem}">
+          <div class="ps-lbl">${ganSem>=0?'Ganancia':'PÃ©rdida'}</div>
+          <div class="ps-val">${fmt(Math.abs(ganSem))}</div>
+        </div>
+      </div>
+
+      <div class="periodo-resultado ${clsSem}">
+        <div class="pr-left">
+          <div class="pr-lbl">${ganSem>=0?'GANANCIA SEMANAL':'PÃ‰RDIDA SEMANAL'}</div>
+          <div class="pr-estado">${estadoSem}</div>
+        </div>
+        <div class="pr-val">${fmt(Math.abs(ganSem))}</div>
+      </div>
+
+      ${ingSem>0?`
+      <div class="card" style="margin-top:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:11px;font-weight:700;color:var(--texto3);letter-spacing:.5px">MARGEN SEMANAL</span>
+          <span style="font-size:17px;font-weight:800;color:${margenSem>30?'var(--verde)':margenSem>10?'var(--amarillo)':'var(--rojo)'}">${margenSem.toFixed(1)}%</span>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-bar" style="width:${margenSem}%;background:${margenSem>30?'var(--verde)':margenSem>10?'var(--amarillo)':'var(--rojo)'}"></div>
+        </div>
+      </div>`:''}
+    </div>
+
+    <div class="divider" style="margin:6px 0 16px"></div>
+
+    <!-- ======== HISTORIAL POR DÃAS ======== -->
+    <div style="margin-bottom:6px">
+      <div style="font-family:var(--font-h);font-size:18px;font-weight:800;margin-bottom:12px">ðŸ“… Historial</div>
+      ${renderHistorialHTML()}
+    </div>
+
+    <div class="divider" style="margin:6px 0 16px"></div>
+
+    <!-- ======== DESGLOSE DE GASTOS ======== -->
+    <div class="card">
+      <div style="font-size:12px;font-weight:700;color:var(--texto2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px">
+        ðŸ“‹ Desglose de gastos operativos
+      </div>
+      ${breakHTML}
+    </div>
+  `;
+}
+
+/* =========================================================
+   FORM: NEGOCIO
+========================================================= */
+let editNegId = null;
+
+function abrirFormNegocio(id) {
+  editNegId = id||null;
+  if (id) {
+    const n = negocios.find(x=>x.id===id);
+    document.getElementById('fn-nombre').value = n.nombre;
+    document.getElementById('fn-tipo').value   = n.tipo||'';
+    document.getElementById('fn-emoji').value  = n.emoji||'ðŸª';
+    document.getElementById('fn-id').value     = id;
+    document.getElementById('sh-neg-title').textContent = 'âœï¸ Editar Negocio';
+  } else {
+    document.getElementById('fn-nombre').value = '';
+    document.getElementById('fn-tipo').value   = '';
+    document.getElementById('fn-emoji').value  = 'ðŸª';
+    document.getElementById('fn-id').value     = '';
+    document.getElementById('sh-neg-title').textContent = 'ðŸª Nuevo Negocio';
+  }
+  document.getElementById('ov-negocio').classList.add('open');
+  setTimeout(()=>document.getElementById('fn-nombre').focus(),80);
+}
+
+function editarNegocio(id) { abrirFormNegocio(id); }
+
+function guardarNegocio() {
+  const nombre = document.getElementById('fn-nombre').value.trim();
+  const tipo   = document.getElementById('fn-tipo').value.trim();
+  const emoji  = document.getElementById('fn-emoji').value.trim()||'ðŸª';
+  const id     = document.getElementById('fn-id').value;
+
+  if (!nombre) { toast('âš ï¸ Escribe el nombre'); return; }
+
+  if (id) {
+    const n = negocios.find(x=>x.id===id);
+    if (n) { n.nombre=nombre; n.tipo=tipo; n.emoji=emoji; }
+  } else {
+    const nuevo = {id:uid(),nombre,tipo,emoji};
+    negocios.push(nuevo);
+    if (!negActivo) { negActivo=nuevo.id; guardar('np_activo',negActivo); }
+  }
+
+  guardar('np_negocios',negocios);
+  cerrarOverlays();
+  renderNegocios();
+  actualizarHeader();
+  toast(id?'âœ… Negocio actualizado':'âœ… Negocio creado');
+}
+
+function pedirEliminarNeg(id) {
+  const n=negocios.find(x=>x.id===id);
+  confirmar(`Â¿Eliminar "${n?.nombre}"?`,
+    'Se eliminarÃ¡n tambiÃ©n todos sus gastos e ingresos.',
+    ()=>{
+      negocios  = negocios.filter(x=>x.id!==id);
+      gastos    = gastos.filter(x=>x.negId!==id);
+      ingresos  = ingresos.filter(x=>x.negId!==id);
+      if (negActivo===id) { negActivo=negocios[0]?.id||null; guardar('np_activo',negActivo); }
+      guardar('np_negocios',negocios);
+      guardar('np_gastos',gastos);
+      guardar('np_ingresos',ingresos);
+      renderNegocios(); actualizarHeader();
+      toast('ðŸ—‘ï¸ Negocio eliminado');
+    }
+  );
+}
+
+/* =========================================================
+   FORM: GASTO
+========================================================= */
+let tipoGasto = 'diario';
+
+function selTipo(tipo) {
+  tipoGasto = tipo;
+  document.querySelectorAll('.tipo-chip').forEach(c=>{
+    c.className = 'tipo-chip';
+    if (c.dataset.tipo===tipo) c.classList.add(`selected-${tipo}`);
+  });
+  document.getElementById('fg-dias-wrap').style.display = tipo==='duracion'?'block':'none';
+}
+
+function abrirFormGasto(id) {
+  if (!negActivo) { toast('âš ï¸ Selecciona un negocio primero'); return; }
+
+  if (id) {
+    const g=gastos.find(x=>x.id===id);
+    document.getElementById('fg-nombre').value = g.nombre;
+    document.getElementById('fg-monto').value  = g.monto;
+    document.getElementById('fg-dias').value   = g.dias||'';
+    document.getElementById('fg-id').value     = id;
+    document.getElementById('sh-gas-title').textContent = 'âœï¸ Editar Gasto';
+    selTipo(g.tipo||'diario');
+  } else {
+    document.getElementById('fg-nombre').value = '';
+    document.getElementById('fg-monto').value  = '';
+    document.getElementById('fg-dias').value   = '';
+    document.getElementById('fg-id').value     = '';
+    document.getElementById('sh-gas-title').textContent = 'ðŸ’¸ Agregar Gasto';
+    selTipo('diario');
+  }
+  document.getElementById('ov-gasto').classList.add('open');
+  setTimeout(()=>document.getElementById('fg-nombre').focus(),80);
+}
+
+function editarGasto(id) { abrirFormGasto(id); }
+
+function guardarGasto() {
+  const nombre = document.getElementById('fg-nombre').value.trim();
+  const monto  = parseFloat(document.getElementById('fg-monto').value);
+  const dias   = parseInt(document.getElementById('fg-dias').value)||1;
+  const id     = document.getElementById('fg-id').value;
+
+  if (!nombre) { toast('âš ï¸ Escribe el nombre'); return; }
+  if (isNaN(monto)||monto<=0) { toast('âš ï¸ Escribe un monto vÃ¡lido'); return; }
+  if (tipoGasto==='duracion' && dias<1) { toast('âš ï¸ DuraciÃ³n mÃ­nima: 1 dÃ­a'); return; }
+
+  if (id) {
+    const g=gastos.find(x=>x.id===id);
+    if(g){g.nombre=nombre;g.monto=monto;g.tipo=tipoGasto;g.dias=dias;}
+  } else {
+    gastos.push({id:uid(), negId:negActivo, nombre, monto, tipo:tipoGasto, dias, fecha:fechaHoy()});
+  }
+
+  guardar('np_gastos',gastos);
+  cerrarOverlays();
+  renderGastos(); actualizarHeader();
+  toast(id?'âœ… Gasto actualizado':'âœ… Gasto agregado');
+}
+
+/* =========================================================
+   FORM: INGRESO
+========================================================= */
+function abrirFormIngreso(id) {
+  if (!negActivo) { toast('âš ï¸ Selecciona un negocio primero'); return; }
+
+  if (id) {
+    const i=ingresos.find(x=>x.id===id);
+    document.getElementById('fi-nombre').value = i.nombre;
+    document.getElementById('fi-monto').value  = i.monto;
+    document.getElementById('fi-id').value     = id;
+    document.getElementById('sh-ing-title').textContent = 'âœï¸ Editar Ingreso';
+  } else {
+    document.getElementById('fi-nombre').value = '';
+    document.getElementById('fi-monto').value  = '';
+    document.getElementById('fi-id').value     = '';
+    document.getElementById('sh-ing-title').textContent = 'ðŸ’µ Agregar Ingreso';
+  }
+  document.getElementById('ov-ingreso').classList.add('open');
+  setTimeout(()=>document.getElementById('fi-nombre').focus(),80);
+}
+
+function editarIngreso(id) { abrirFormIngreso(id); }
+
+function guardarIngreso() {
+  const nombre = document.getElementById('fi-nombre').value.trim();
+  const monto  = parseFloat(document.getElementById('fi-monto').value);
+  const id     = document.getElementById('fi-id').value;
+
+  if (!nombre) { toast('âš ï¸ Escribe la descripciÃ³n'); return; }
+  if (isNaN(monto)||monto<=0) { toast('âš ï¸ Escribe un monto vÃ¡lido'); return; }
+
+  if (id) {
+    const i=ingresos.find(x=>x.id===id);
+    if(i){i.nombre=nombre;i.monto=monto;}
+  } else {
+    ingresos.push({id:uid(), negId:negActivo, nombre, monto, fecha:fechaHoy()});
+  }
+
+  guardar('np_ingresos',ingresos);
+  cerrarOverlays();
+  renderIngresos(); actualizarHeader();
+  toast(id?'âœ… Ingreso actualizado':'âœ… Ingreso agregado');
+}
+
+/* =========================================================
+   ELIMINAR ITEMS
+========================================================= */
+function pedirEliminarItem(tipo,id,nombre) {
+  confirmar(`Â¿Eliminar "${nombre}"?`,'Este registro se borrarÃ¡ permanentemente.',()=>{
+    if(tipo==='gasto') {
+      gastos=gastos.filter(x=>x.id!==id);
+      guardar('np_gastos',gastos);
+      renderGastos();
+    } else {
+      ingresos=ingresos.filter(x=>x.id!==id);
+      guardar('np_ingresos',ingresos);
+      renderIngresos();
+    }
+    actualizarHeader();
+    toast('ðŸ—‘ï¸ Eliminado');
+  });
+}
+
+/* =========================================================
+   NUEVO DÃA
+========================================================= */
+function pedirNuevoDia() {
+  confirmar('ðŸŒ… Â¿Nuevo dÃ­a?',
+    'Se guardarÃ¡n los ingresos de hoy en el historial y podrÃ¡s empezar desde cero.',
+    ()=>{
+      // Guardar snapshot del dÃ­a en historial
+      const hd = fechaHoy();
+      const historial = cargar('np_historial', []);
+      // Un snapshot por negocio con ingresos del dÃ­a
+      negocios.forEach(neg => {
+        const ingDia = ingresos.filter(i=>i.negId===neg.id && (i.fecha||hd)===hd);
+        if (ingDia.length > 0) {
+          const snap = {
+            fecha: hd,
+            negId: neg.id,
+            negNombre: neg.nombre,
+            negEmoji: neg.emoji,
+            ingresos: ingDia,
+            totalIng: ingDia.reduce((s,i)=>s+i.monto,0),
+            totalGastos: totalGastosOperativos(neg.id),
+            ganancia: totalIngresos(neg.id, hd) - totalGastosOperativos(neg.id)
+          };
+          // Reemplaza si ya existe snapshot de ese dÃ­a+negocio
+          const idx = historial.findIndex(h=>h.fecha===hd&&h.negId===neg.id);
+          if (idx>=0) historial[idx]=snap; else historial.unshift(snap);
+        }
+      });
+      guardar('np_historial', historial);
+      // Borrar ingresos de hoy
+      ingresos = ingresos.filter(i=>(i.fecha||hd)!==hd);
+      guardar('np_ingresos',ingresos);
+      renderTab(tabActual);
+      toast('ðŸŒ… Â¡Nuevo dÃ­a iniciado! Historial guardado.');
+    }
+  );
+}
+
+/* =========================================================
+   BACKUP
+========================================================= */
+function exportarDatos() {
+  const datos = {
+    version: 2,
+    fecha: new Date().toISOString(),
+    negocios,
+    gastos,
+    ingresos,
+    negActivo,
+    historial: cargar('np_historial', [])
+  };
+  const blob = new Blob([JSON.stringify(datos,null,2)],{type:'application/json'});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `negocio-pro-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('ðŸ“¤ Datos exportados');
+}
+
+function importarDatos(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const datos = JSON.parse(e.target.result);
+      if (!datos.negocios) throw new Error('Formato invÃ¡lido');
+      negocios  = datos.negocios  || [];
+      gastos    = datos.gastos    || [];
+      ingresos  = datos.ingresos  || [];
+      negActivo = datos.negActivo || negocios[0]?.id || null;
+      guardar('np_negocios',negocios);
+      guardar('np_gastos',gastos);
+      guardar('np_ingresos',ingresos);
+      guardar('np_activo',negActivo);
+      if (datos.historial) guardar('np_historial', datos.historial);
+      renderTab(tabActual);
+      toast('ðŸ“¥ Datos importados correctamente');
+    } catch {
+      toast('âŒ Archivo invÃ¡lido');
+    }
+    event.target.value='';
+  };
+  reader.readAsText(file);
+}
+
+/* =========================================================
+   MODAL CONFIRM
+========================================================= */
+let pendFn = null;
+
+function confirmar(title,body,fn) {
+  document.getElementById('conf-title').textContent = title;
+  document.getElementById('conf-body').textContent  = body;
+  pendFn = fn;
+  document.getElementById('ov-confirm').classList.add('open');
+}
+
+document.getElementById('conf-ok').addEventListener('click',()=>{
+  if(pendFn){pendFn();pendFn=null;}
+  cerrarOverlays();
+});
+
+function cerrarOverlays() {
+  document.querySelectorAll('.overlay').forEach(o=>o.classList.remove('open'));
+}
+
+document.querySelectorAll('.overlay').forEach(o=>{
+  o.addEventListener('click',e=>{if(e.target===o)cerrarOverlays();});
+});
+
+/* =========================================================
+   UTILS
+========================================================= */
+function esc(s) {
+  return String(s??'')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* =========================================================
+   INIT
+========================================================= */
+
+// Measure header and set content top offset dynamically
+ajustarLayout();
+window.addEventListener('resize', ajustarLayout);
+
+// Migrar registros existentes sin fecha
+migrarFechas();
+
+actualizarHeader();
+renderNegocios();
+</script>
+</body>
+</html>
