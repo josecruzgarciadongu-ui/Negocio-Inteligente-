@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>ðŸ’° Negocio Pro</title>
+<title>💰 Negocio Pro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -44,7 +44,7 @@ html, body {
 }
 
 /* ============================================================
-   LAYOUT SHELL â€” fixed header + fixed bottom nav + scroll body
+   LAYOUT SHELL — fixed header + fixed bottom nav + scroll body
 ============================================================ */
 #app {
   max-width: 480px;
@@ -132,7 +132,7 @@ html, body {
 .ganancia-val.neu { color: var(--texto2); }
 
 /* ============================================================
-   SCROLL CONTENT â€” sits between fixed header and fixed bottom nav
+   SCROLL CONTENT — sits between fixed header and fixed bottom nav
 ============================================================ */
 .content {
   position: fixed;
@@ -154,7 +154,7 @@ html, body {
 .page.active { display: block; }
 
 /* ============================================================
-   BOTTOM NAV â€” always fixed at bottom, never scrolls away
+   BOTTOM NAV — always fixed at bottom, never scrolls away
 ============================================================ */
 .bottom-nav {
   position: fixed;
@@ -658,7 +658,7 @@ html, body {
 }
 
 /* ============================================================
-   NUEVO DÃA FLOATING BTN
+   NUEVO DÍA FLOATING BTN
 ============================================================ */
 .fab {
   position: fixed;
@@ -722,7 +722,7 @@ html, body {
 .breakdown-monto { font-weight: 700; font-size: 14px; }
 
 /* ============================================================
-   RESUMEN SEMANAL â€” bloque separado
+   RESUMEN SEMANAL — bloque separado
 ============================================================ */
 .bloque-periodo {
   margin-bottom: 16px;
@@ -829,11 +829,11 @@ html, body {
   <!-- ====== HEADER ====== -->
   <div class="header" id="main-header">
     <div class="header-top">
-      <div class="app-title">ðŸ’° Negocio Pro</div>
+      <div class="app-title">💰 Negocio Pro</div>
       <div class="header-fecha" id="hdr-fecha"></div>
     </div>
     <div class="negocio-activo" id="hdr-negocio">
-      <span>â†‘</span> Selecciona un negocio
+      <span>↑</span> Selecciona un negocio
     </div>
     <div class="ganancia-header">
       <div class="ganancia-lbl">HOY:</div>
@@ -848,7 +848,7 @@ html, body {
     <div class="page active" id="page-negocios">
       <div class="sec-title">
         Mis Negocios
-        <button class="btn btn-rojo btn-sm" onclick="abrirFormNegocio()">ï¼‹ Nuevo</button>
+        <button class="btn btn-rojo btn-sm" onclick="abrirFormNegocio()">＋ Nuevo</button>
       </div>
       <div id="lista-negocios"></div>
     </div>
@@ -858,7 +858,7 @@ html, body {
       <div id="gastos-total-bar"></div>
       <div class="sec-title">
         Gastos
-        <button class="btn btn-rojo btn-sm" onclick="abrirFormGasto()">ï¼‹ Agregar</button>
+        <button class="btn btn-rojo btn-sm" onclick="abrirFormGasto()">＋ Agregar</button>
       </div>
       <div id="lista-gastos"></div>
     </div>
@@ -868,25 +868,25 @@ html, body {
       <div id="ingresos-total-bar"></div>
       <div class="sec-title">
         Ingresos
-        <button class="btn btn-verde btn-sm" onclick="abrirFormIngreso()">ï¼‹ Agregar</button>
+        <button class="btn btn-verde btn-sm" onclick="abrirFormIngreso()">＋ Agregar</button>
       </div>
       <div id="lista-ingresos"></div>
     </div>
 
     <!-- PAGE: RESUMEN -->
     <div class="page" id="page-resumen">
-      <div class="sec-title">Resumen del dÃ­a</div>
+      <div class="sec-title">Resumen del día</div>
       <div id="resumen-contenido"></div>
       <!-- BACKUP -->
       <div class="divider"></div>
-      <div class="sec-title" style="font-size:16px">âš™ï¸ Datos</div>
+      <div class="sec-title" style="font-size:16px">⚙️ Datos</div>
       <div class="backup-row">
-        <button class="btn btn-gris btn-full" onclick="exportarDatos()">ðŸ“¤ Exportar</button>
-        <button class="btn btn-gris btn-full" onclick="document.getElementById('import-file').click()">ðŸ“¥ Importar</button>
+        <button class="btn btn-gris btn-full" onclick="exportarDatos()">📤 Exportar</button>
+        <button class="btn btn-gris btn-full" onclick="document.getElementById('import-file').click()">📥 Importar</button>
       </div>
       <input type="file" id="import-file" accept=".json" style="display:none" onchange="importarDatos(event)">
       <div style="margin-top:10px">
-        <button class="btn btn-warn btn-full" onclick="pedirNuevoDia()">ðŸŒ… Nuevo DÃ­a (limpiar ingresos y gastos del dÃ­a)</button>
+        <button class="btn btn-warn btn-full" onclick="pedirNuevoDia()">🌅 Nuevo Día (limpiar ingresos y gastos del día)</button>
       </div>
     </div>
 
@@ -894,22 +894,22 @@ html, body {
 
 </div><!-- /app -->
 
-<!-- ====== BOTTOM NAV â€” FIXED, OUTSIDE #app ====== -->
+<!-- ====== BOTTOM NAV — FIXED, OUTSIDE #app ====== -->
 <nav class="bottom-nav" id="bottom-nav">
   <button class="bnav active" id="bnav-negocios" onclick="cambiarTab('negocios')">
-    <span class="bico">ðŸª</span>
+    <span class="bico">🏪</span>
     <span class="blbl">Negocios</span>
   </button>
   <button class="bnav" id="bnav-gastos" onclick="cambiarTab('gastos')">
-    <span class="bico">ðŸ’¸</span>
+    <span class="bico">💸</span>
     <span class="blbl">Gastos</span>
   </button>
   <button class="bnav" id="bnav-ingresos" onclick="cambiarTab('ingresos')">
-    <span class="bico">ðŸ’µ</span>
+    <span class="bico">💵</span>
     <span class="blbl">Ingresos</span>
   </button>
   <button class="bnav" id="bnav-resumen" onclick="cambiarTab('resumen')">
-    <span class="bico">ðŸ“Š</span>
+    <span class="bico">📊</span>
     <span class="blbl">Resumen</span>
   </button>
 </nav>
@@ -921,23 +921,23 @@ html, body {
 <!-- Negocio -->
 <div class="overlay" id="ov-negocio">
   <div class="sheet">
-    <div class="sheet-title" id="sh-neg-title">ðŸª Nuevo Negocio</div>
+    <div class="sheet-title" id="sh-neg-title">🏪 Nuevo Negocio</div>
     <div class="form-group">
       <label class="form-lbl">Nombre del negocio</label>
       <input class="form-input" id="fn-nombre" placeholder="Ej: Carne Asada" maxlength="30" autocomplete="off">
     </div>
     <div class="form-group">
-      <label class="form-lbl">Tipo / descripciÃ³n</label>
+      <label class="form-lbl">Tipo / descripción</label>
       <input class="form-input" id="fn-tipo" placeholder="Ej: Fin de semana" maxlength="30" autocomplete="off">
     </div>
     <div class="form-group">
       <label class="form-lbl">Emoji</label>
-      <input class="form-input" id="fn-emoji" placeholder="ðŸ¥©" maxlength="4">
+      <input class="form-input" id="fn-emoji" placeholder="🥩" maxlength="4">
     </div>
     <input type="hidden" id="fn-id">
     <div class="btn-row">
       <button class="btn btn-gris" onclick="cerrarOverlays()">Cancelar</button>
-      <button class="btn btn-rojo" onclick="guardarNegocio()">âœ“ Guardar</button>
+      <button class="btn btn-rojo" onclick="guardarNegocio()">✓ Guardar</button>
     </div>
   </div>
 </div>
@@ -945,10 +945,10 @@ html, body {
 <!-- Gasto -->
 <div class="overlay" id="ov-gasto">
   <div class="sheet">
-    <div class="sheet-title" id="sh-gas-title">ðŸ’¸ Agregar Gasto</div>
+    <div class="sheet-title" id="sh-gas-title">💸 Agregar Gasto</div>
     <div class="form-group">
       <label class="form-lbl">Nombre del gasto</label>
-      <input class="form-input" id="fg-nombre" placeholder="Ej: Carne, Gas, Tortillasâ€¦" maxlength="40" autocomplete="off">
+      <input class="form-input" id="fg-nombre" placeholder="Ej: Carne, Gas, Tortillas…" maxlength="40" autocomplete="off">
     </div>
     <div class="form-group">
       <label class="form-lbl">Monto total ($)</label>
@@ -957,19 +957,19 @@ html, body {
     <div class="form-group">
       <label class="form-lbl">Tipo de gasto</label>
       <div class="tipo-chips" id="chips-tipo">
-        <button class="tipo-chip selected-diario" data-tipo="diario"   onclick="selTipo('diario')">ðŸ“… Diario</button>
-        <button class="tipo-chip"                 data-tipo="duracion" onclick="selTipo('duracion')">ðŸ“† Por duraciÃ³n</button>
-        <button class="tipo-chip"                 data-tipo="extra"    onclick="selTipo('extra')">âš¡ Extra</button>
+        <button class="tipo-chip selected-diario" data-tipo="diario"   onclick="selTipo('diario')">📅 Diario</button>
+        <button class="tipo-chip"                 data-tipo="duracion" onclick="selTipo('duracion')">📆 Por duración</button>
+        <button class="tipo-chip"                 data-tipo="extra"    onclick="selTipo('extra')">⚡ Extra</button>
       </div>
     </div>
     <div class="form-group" id="fg-dias-wrap" style="display:none">
-      <label class="form-lbl">DuraciÃ³n (dÃ­as)</label>
+      <label class="form-lbl">Duración (días)</label>
       <input class="form-input" id="fg-dias" type="number" min="1" step="1" placeholder="Ej: 7">
     </div>
     <input type="hidden" id="fg-id">
     <div class="btn-row">
       <button class="btn btn-gris" onclick="cerrarOverlays()">Cancelar</button>
-      <button class="btn btn-rojo" onclick="guardarGasto()">âœ“ Guardar</button>
+      <button class="btn btn-rojo" onclick="guardarGasto()">✓ Guardar</button>
     </div>
   </div>
 </div>
@@ -977,10 +977,10 @@ html, body {
 <!-- Ingreso -->
 <div class="overlay" id="ov-ingreso">
   <div class="sheet verde">
-    <div class="sheet-title" id="sh-ing-title">ðŸ’µ Agregar Ingreso</div>
+    <div class="sheet-title" id="sh-ing-title">💵 Agregar Ingreso</div>
     <div class="form-group">
-      <label class="form-lbl">DescripciÃ³n</label>
-      <input class="form-input" id="fi-nombre" placeholder="Ej: Venta del dÃ­a, Pedidoâ€¦" maxlength="40" autocomplete="off">
+      <label class="form-lbl">Descripción</label>
+      <input class="form-input" id="fi-nombre" placeholder="Ej: Venta del día, Pedido…" maxlength="40" autocomplete="off">
     </div>
     <div class="form-group">
       <label class="form-lbl">Monto ($)</label>
@@ -989,7 +989,7 @@ html, body {
     <input type="hidden" id="fi-id">
     <div class="btn-row">
       <button class="btn btn-gris" onclick="cerrarOverlays()">Cancelar</button>
-      <button class="btn btn-verde" onclick="guardarIngreso()">âœ“ Guardar</button>
+      <button class="btn btn-verde" onclick="guardarIngreso()">✓ Guardar</button>
     </div>
   </div>
 </div>
@@ -997,7 +997,7 @@ html, body {
 <!-- Confirm -->
 <div class="overlay" id="ov-confirm">
   <div class="sheet">
-    <div class="sheet-title" id="conf-title">Â¿Confirmar?</div>
+    <div class="sheet-title" id="conf-title">¿Confirmar?</div>
     <p id="conf-body" style="font-size:14px;color:var(--texto2);margin-bottom:18px;line-height:1.5"></p>
     <div class="btn-row">
       <button class="btn btn-gris" onclick="cerrarOverlays()">Cancelar</button>
@@ -1016,7 +1016,7 @@ html, body {
 'use strict';
 
 /* =========================================================
-   LAYOUT HELPER â€” declared early so header updater can use it
+   LAYOUT HELPER — declared early so header updater can use it
 ========================================================= */
 function ajustarLayout() {
   const hdr = document.getElementById('main-header');
@@ -1064,7 +1064,7 @@ function rangoSemana() {
     const [y,m,d] = s.split('-');
     return `${d}/${m}`;
   };
-  return `${fmt2(dias[0])} â€“ ${fmt2(dias[6])}`;
+  return `${fmt2(dias[0])} – ${fmt2(dias[6])}`;
 }
 
 function cargar(k,def) {
@@ -1090,8 +1090,8 @@ let negActivo = cargar('np_activo',   null);
 // Asegura que haya negocios demo si es primera vez
 if (negocios.length === 0) {
   negocios = [
-    {id:uid(), nombre:'Carne Asada', tipo:'Fin de semana', emoji:'ðŸ¥©'},
-    {id:uid(), nombre:'CarnicerÃ­a',  tipo:'Diario',        emoji:'ðŸ”ª'},
+    {id:uid(), nombre:'Carne Asada', tipo:'Fin de semana', emoji:'🥩'},
+    {id:uid(), nombre:'Carnicería',  tipo:'Diario',        emoji:'🔪'},
   ];
   guardar('np_negocios', negocios);
 }
@@ -1103,7 +1103,7 @@ if (!negActivo || !negocios.find(n=>n.id===negActivo)) {
 }
 
 /* =========================================================
-   CÃLCULOS
+   CÁLCULOS
 ========================================================= */
 function gastosDiarios(negId) {
   return gastos
@@ -1139,7 +1139,7 @@ function ganancia(negId) {
 }
 
 /* =========================================================
-   MIGRACIÃ“N â€” asignar fecha a registros sin ella
+   MIGRACIÓN — asignar fecha a registros sin ella
 ========================================================= */
 function migrarFechas() {
   const hd = fechaHoy();
@@ -1153,10 +1153,10 @@ function migrarFechas() {
 }
 
 /* =========================================================
-   CÃLCULOS SEMANALES
+   CÁLCULOS SEMANALES
 ========================================================= */
 
-// Ingresos de los Ãºltimos 7 dÃ­as para un negocio
+// Ingresos de los últimos 7 días para un negocio
 function ingresosSemanales(negId) {
   const fechas = new Set(ultimas7Fechas());
   return ingresos
@@ -1164,7 +1164,7 @@ function ingresosSemanales(negId) {
     .reduce((s,i) => s + i.monto, 0);
 }
 
-// Gastos diarios de los Ãºltimos 7 dÃ­as (solo tipo=diario, con fecha en rango)
+// Gastos diarios de los últimos 7 días (solo tipo=diario, con fecha en rango)
 function gastosDiariosSemanales(negId) {
   const fechas = new Set(ultimas7Fechas());
   return gastos
@@ -1172,9 +1172,9 @@ function gastosDiariosSemanales(negId) {
     .reduce((s,g) => s + g.monto, 0);
 }
 
-// Gastos por duraciÃ³n: cada uno aporta (monto/dias) Ã— cant_dÃ­as_en_ventana
-// Un gasto de duraciÃ³n cubre desde su fecha de creaciÃ³n durante g.dias dÃ­as.
-// Para la ventana semanal, contamos cuÃ¡ntos de esos dÃ­as caen en los Ãºltimos 7.
+// Gastos por duración: cada uno aporta (monto/dias) × cant_días_en_ventana
+// Un gasto de duración cubre desde su fecha de creación durante g.dias días.
+// Para la ventana semanal, contamos cuántos de esos días caen en los últimos 7.
 function gastosDuracionSemanales(negId) {
   const ventana = ultimas7Fechas(); // ["2025-01-01", ..., "2025-01-07"]
   const ventanaSet = new Set(ventana);
@@ -1199,7 +1199,7 @@ function gastosDuracionSemanales(negId) {
     }, 0);
 }
 
-// Gastos operativos semanales = diarios en rango + duraciÃ³n prorrateada
+// Gastos operativos semanales = diarios en rango + duración prorrateada
 function gastosOperativosSemanales(negId) {
   return gastosDiariosSemanales(negId) + gastosDuracionSemanales(negId);
 }
@@ -1217,7 +1217,7 @@ function actualizarHeader() {
 
   const neg = negocios.find(n=>n.id===negActivo);
   if (!neg) {
-    document.getElementById('hdr-negocio').innerHTML = '<span>â†‘</span> Selecciona un negocio';
+    document.getElementById('hdr-negocio').innerHTML = '<span>↑</span> Selecciona un negocio';
     document.getElementById('hdr-ganancia').textContent = '$0.00';
     document.getElementById('hdr-ganancia').className = 'ganancia-val neu';
     setTimeout(ajustarLayout, 50);
@@ -1262,7 +1262,7 @@ function renderNegocios() {
   const wrap = document.getElementById('lista-negocios');
 
   if (negocios.length===0) {
-    wrap.innerHTML = `<div class="empty"><div class="eico">ðŸª</div><div class="etxt">Sin negocios aÃºn.<br>Crea tu primero.</div></div>`;
+    wrap.innerHTML = `<div class="empty"><div class="eico">🏪</div><div class="etxt">Sin negocios aún.<br>Crea tu primero.</div></div>`;
     return;
   }
 
@@ -1273,12 +1273,12 @@ function renderNegocios() {
     return `
       <div class="negocio-card${isActive?' selected':''}" onclick="selNegocio('${neg.id}')">
         <div class="neg-left">
-          <div class="neg-emoji">${neg.emoji||'ðŸª'}</div>
+          <div class="neg-emoji">${neg.emoji||'🏪'}</div>
           <div class="neg-nombre">${esc(neg.nombre)}</div>
           <div class="neg-tipo">${esc(neg.tipo||'')}</div>
           <div class="neg-actions">
-            <button class="btn btn-gris btn-sm" onclick="event.stopPropagation();editarNegocio('${neg.id}')">âœï¸</button>
-            <button class="btn btn-gris btn-sm" onclick="event.stopPropagation();pedirEliminarNeg('${neg.id}')">ðŸ—‘ï¸</button>
+            <button class="btn btn-gris btn-sm" onclick="event.stopPropagation();editarNegocio('${neg.id}')">✏️</button>
+            <button class="btn btn-gris btn-sm" onclick="event.stopPropagation();pedirEliminarNeg('${neg.id}')">🗑️</button>
           </div>
         </div>
         <div class="neg-right">
@@ -1298,7 +1298,7 @@ function selNegocio(id) {
   guardar('np_activo', negActivo);
   renderNegocios();
   actualizarHeader();
-  toast('âœ… Negocio seleccionado');
+  toast('✅ Negocio seleccionado');
 }
 
 /* =========================================================
@@ -1307,7 +1307,7 @@ function selNegocio(id) {
 function renderGastos() {
   if (!negActivo) {
     document.getElementById('gastos-total-bar').innerHTML = '';
-    document.getElementById('lista-gastos').innerHTML = `<div class="empty"><div class="eico">ðŸª</div><div class="etxt">Selecciona un negocio primero.</div></div>`;
+    document.getElementById('lista-gastos').innerHTML = `<div class="empty"><div class="eico">🏪</div><div class="etxt">Selecciona un negocio primero.</div></div>`;
     return;
   }
 
@@ -1321,7 +1321,7 @@ function renderGastos() {
       <div class="stat-box">
         <div class="stat-lbl">Gastos operativos</div>
         <div class="stat-val rojo">${fmt(totalOp)}</div>
-        <div style="font-size:10px;color:var(--texto3);margin-top:3px">Diarios + DuraciÃ³n</div>
+        <div style="font-size:10px;color:var(--texto3);margin-top:3px">Diarios + Duración</div>
       </div>
       <div class="stat-box">
         <div class="stat-lbl">Gastos extra</div>
@@ -1334,26 +1334,26 @@ function renderGastos() {
   const mis = gastos.filter(g=>g.negId===negActivo);
 
   if (mis.length===0) {
-    document.getElementById('lista-gastos').innerHTML = `<div class="empty"><div class="eico">ðŸ’¸</div><div class="etxt">Sin gastos registrados.</div></div>`;
+    document.getElementById('lista-gastos').innerHTML = `<div class="empty"><div class="eico">💸</div><div class="etxt">Sin gastos registrados.</div></div>`;
     return;
   }
 
   document.getElementById('lista-gastos').innerHTML = mis.map(g=>{
     const diario = g.tipo==='duracion' ? g.monto/(g.dias||1) : (g.tipo==='diario'?g.monto:0);
-    const tipoLabel = g.tipo==='diario'?'ðŸ“… Diario':g.tipo==='duracion'?`ðŸ“† ${g.dias}d`:'âš¡ Extra';
+    const tipoLabel = g.tipo==='diario'?'📅 Diario':g.tipo==='duracion'?`📆 ${g.dias}d`:'⚡ Extra';
     const colorClass = g.tipo==='extra'?'extra':'gasto';
     return `
       <div class="item-card">
-        <div class="item-ico ${colorClass}">${g.tipo==='extra'?'âš¡':g.tipo==='duracion'?'ðŸ“†':'ðŸ“…'}</div>
+        <div class="item-ico ${colorClass}">${g.tipo==='extra'?'⚡':g.tipo==='duracion'?'📆':'📅'}</div>
         <div class="item-info">
           <div class="item-nombre">${esc(g.nombre)}</div>
-          <div class="item-meta">${tipoLabel}${g.tipo==='duracion'?` Â· $${(diario).toFixed(2)}/dÃ­a`:''} Â· ${g.fecha||fechaHoy()}</div>
+          <div class="item-meta">${tipoLabel}${g.tipo==='duracion'?` · $${(diario).toFixed(2)}/día`:''} · ${g.fecha||fechaHoy()}</div>
         </div>
         <div>
           <div class="item-monto ${colorClass}">${fmt(g.monto)}</div>
           <div style="display:flex;gap:5px;margin-top:5px;justify-content:flex-end">
-            <button class="ico-btn" onclick="editarGasto('${g.id}')">âœï¸</button>
-            <button class="ico-btn" onclick="pedirEliminarItem('gasto','${g.id}','${esc(g.nombre)}')">ðŸ—‘ï¸</button>
+            <button class="ico-btn" onclick="editarGasto('${g.id}')">✏️</button>
+            <button class="ico-btn" onclick="pedirEliminarItem('gasto','${g.id}','${esc(g.nombre)}')">🗑️</button>
           </div>
         </div>
       </div>
@@ -1367,7 +1367,7 @@ function renderGastos() {
 function renderIngresos() {
   if (!negActivo) {
     document.getElementById('ingresos-total-bar').innerHTML = '';
-    document.getElementById('lista-ingresos').innerHTML = `<div class="empty"><div class="eico">ðŸª</div><div class="etxt">Selecciona un negocio primero.</div></div>`;
+    document.getElementById('lista-ingresos').innerHTML = `<div class="empty"><div class="eico">🏪</div><div class="etxt">Selecciona un negocio primero.</div></div>`;
     return;
   }
 
@@ -1387,22 +1387,22 @@ function renderIngresos() {
   const mis = ingresos.filter(i=>i.negId===negActivo&&(i.fecha||hd)===hd);
 
   if (mis.length===0) {
-    document.getElementById('lista-ingresos').innerHTML = `<div class="empty"><div class="eico">ðŸ’µ</div><div class="etxt">Sin ingresos hoy.<br>Â¡Agrega tu primera venta!</div></div>`;
+    document.getElementById('lista-ingresos').innerHTML = `<div class="empty"><div class="eico">💵</div><div class="etxt">Sin ingresos hoy.<br>¡Agrega tu primera venta!</div></div>`;
     return;
   }
 
   document.getElementById('lista-ingresos').innerHTML = mis.map(i=>`
     <div class="item-card">
-      <div class="item-ico ingreso">ðŸ’µ</div>
+      <div class="item-ico ingreso">💵</div>
       <div class="item-info">
         <div class="item-nombre">${esc(i.nombre)}</div>
-        <div class="item-meta">ðŸ“… ${i.fecha || hd}</div>
+        <div class="item-meta">📅 ${i.fecha || hd}</div>
       </div>
       <div>
         <div class="item-monto ingreso">${fmt(i.monto)}</div>
         <div style="display:flex;gap:5px;margin-top:5px;justify-content:flex-end">
-          <button class="ico-btn" onclick="editarIngreso('${i.id}')">âœï¸</button>
-          <button class="ico-btn" onclick="pedirEliminarItem('ingreso','${i.id}','${esc(i.nombre)}')">ðŸ—‘ï¸</button>
+          <button class="ico-btn" onclick="editarIngreso('${i.id}')">✏️</button>
+          <button class="ico-btn" onclick="pedirEliminarItem('ingreso','${i.id}','${esc(i.nombre)}')">🗑️</button>
         </div>
       </div>
     </div>
@@ -1418,7 +1418,7 @@ function renderHistorialHTML() {
   const miHist = historial.filter(h=>h.negId===negActivo);
 
   if (miHist.length === 0) {
-    return `<div style="color:var(--texto3);font-size:13px;padding:8px 0">Sin historial aÃºn. Al presionar "Nuevo DÃ­a" se guardarÃ¡ el registro de hoy.</div>`;
+    return `<div style="color:var(--texto3);font-size:13px;padding:8px 0">Sin historial aún. Al presionar "Nuevo Día" se guardará el registro de hoy.</div>`;
   }
 
   return miHist.map((h, idx) => {
@@ -1438,15 +1438,15 @@ function renderHistorialHTML() {
         <div style="display:flex;align-items:center;justify-content:space-between">
           <div>
             <div style="font-weight:700;font-size:14px">${fechaDisplay}</div>
-            <div style="font-size:11px;color:var(--texto3);margin-top:2px">Ingresos: ${fmt(h.totalIng)} Â· Gastos: ${fmt(h.totalGastos)}</div>
+            <div style="font-size:11px;color:var(--texto3);margin-top:2px">Ingresos: ${fmt(h.totalIng)} · Gastos: ${fmt(h.totalGastos)}</div>
           </div>
           <div style="text-align:right">
             <div style="font-family:var(--font-h);font-size:20px;font-weight:900;color:${cls}">${sign}${fmt(Math.abs(gan))}</div>
-            <div style="font-size:10px;color:var(--texto3);margin-top:2px">ver detalle â–¼</div>
+            <div style="font-size:10px;color:var(--texto3);margin-top:2px">ver detalle ▼</div>
           </div>
         </div>
         <div id="${detId}" style="display:none;margin-top:10px;border-top:1px solid var(--linea);padding-top:8px">
-          <div style="font-size:11px;font-weight:700;color:var(--texto3);margin-bottom:6px;text-transform:uppercase">Ingresos del dÃ­a</div>
+          <div style="font-size:11px;font-weight:700;color:var(--texto3);margin-bottom:6px;text-transform:uppercase">Ingresos del día</div>
           ${ingRows || '<div style="color:var(--texto3);font-size:12px">Sin registros</div>'}
           <div style="display:flex;justify-content:space-between;margin-top:8px;padding-top:6px;border-top:1px solid var(--linea)">
             <span style="font-size:12px;font-weight:700;color:var(--texto2)">TOTAL INGRESOS</span>
@@ -1457,7 +1457,7 @@ function renderHistorialHTML() {
             <span style="font-size:14px;font-weight:800;color:var(--rojo)">${fmt(h.totalGastos)}</span>
           </div>
           <div style="display:flex;justify-content:space-between;margin-top:4px">
-            <span style="font-size:12px;font-weight:700;color:var(--texto2)">${gan>=0?'GANANCIA':'PÃ‰RDIDA'}</span>
+            <span style="font-size:12px;font-weight:700;color:var(--texto2)">${gan>=0?'GANANCIA':'PÉRDIDA'}</span>
             <span style="font-size:16px;font-weight:900;color:${cls}">${sign}${fmt(Math.abs(gan))}</span>
           </div>
         </div>
@@ -1477,7 +1477,7 @@ function toggleHistDet(id) {
 ========================================================= */
 function renderResumen() {
   if (!negActivo) {
-    document.getElementById('resumen-contenido').innerHTML = `<div class="empty"><div class="eico">ðŸª</div><div class="etxt">Selecciona un negocio primero.</div></div>`;
+    document.getElementById('resumen-contenido').innerHTML = `<div class="empty"><div class="eico">🏪</div><div class="etxt">Selecciona un negocio primero.</div></div>`;
     return;
   }
 
@@ -1491,14 +1491,14 @@ function renderResumen() {
   const gan    = ing - gsOp;
   const margen = ing>0 ? Math.min(100, Math.max(0,(gan/ing)*100)) : 0;
   const clsDia = gan>0?'pos':gan<0?'neg':'neu';
-  const estadoDia = gan>0?'ðŸŸ¢ Vas ganando hoy':gan<0?'ðŸ”´ EstÃ¡s en pÃ©rdida':'âšª Sin movimientos';
+  const estadoDia = gan>0?'🟢 Vas ganando hoy':gan<0?'🔴 Estás en pérdida':'⚪ Sin movimientos';
 
   // ---- DATOS SEMANALES ----
   const ingSem  = ingresosSemanales(negActivo);
   const gsOpSem = gastosOperativosSemanales(negActivo);
   const ganSem  = gananciaSemanales(negActivo);
   const clsSem  = ganSem>0?'pos':ganSem<0?'neg':'neu';
-  const estadoSem = ganSem>0?'ðŸŸ¢ Semana positiva':ganSem<0?'ðŸ”´ Semana en pÃ©rdida':'âšª Sin movimientos';
+  const estadoSem = ganSem>0?'🟢 Semana positiva':ganSem<0?'🔴 Semana en pérdida':'⚪ Sin movimientos';
   const margenSem = ingSem>0 ? Math.min(100,Math.max(0,(ganSem/ingSem)*100)) : 0;
 
   // ---- BREAKDOWN DE GASTOS ----
@@ -1512,7 +1512,7 @@ function renderResumen() {
               <div class="breakdown-nombre">${esc(g.nombre)}</div>
               <span class="breakdown-tipo ${g.tipo==='diario'?'bt-diario':'bt-duracion'}">${g.tipo==='diario'?'Diario':`${g.dias}d`}</span>
             </div>
-            <div class="breakdown-monto" style="color:var(--rojo)">${fmt(montoMostrar)}/dÃ­a</div>
+            <div class="breakdown-monto" style="color:var(--rojo)">${fmt(montoMostrar)}/día</div>
           </div>
         `;
       }).join('')
@@ -1523,7 +1523,7 @@ function renderResumen() {
     <!-- ======== BLOQUE DIARIO ======== -->
     <div class="bloque-periodo">
       <div class="periodo-header">
-        <span class="periodo-badge dia">ðŸ“… Hoy</span>
+        <span class="periodo-badge dia">📅 Hoy</span>
         <span class="periodo-fecha-rango">${new Date().toLocaleDateString('es-MX',{weekday:'long',day:'numeric',month:'short'})}</span>
       </div>
 
@@ -1537,14 +1537,14 @@ function renderResumen() {
           <div class="ps-val">${fmt(gsOp)}</div>
         </div>
         <div class="periodo-stat gan ${clsDia}">
-          <div class="ps-lbl">${gan>=0?'Ganancia':'PÃ©rdida'}</div>
+          <div class="ps-lbl">${gan>=0?'Ganancia':'Pérdida'}</div>
           <div class="ps-val">${fmt(Math.abs(gan))}</div>
         </div>
       </div>
 
       <div class="periodo-resultado ${clsDia}">
         <div class="pr-left">
-          <div class="pr-lbl">${gan>=0?'GANANCIA DEL DÃA':'PÃ‰RDIDA DEL DÃA'}</div>
+          <div class="pr-lbl">${gan>=0?'GANANCIA DEL DÍA':'PÉRDIDA DEL DÍA'}</div>
           <div class="pr-estado">${estadoDia}</div>
         </div>
         <div class="pr-val">${fmt(Math.abs(gan))}</div>
@@ -1563,7 +1563,7 @@ function renderResumen() {
 
       ${gsEx>0?`
       <div class="total-bar extras" style="margin-top:8px">
-        <div class="tb-lbl">âš¡ Extras del dÃ­a (info)</div>
+        <div class="tb-lbl">⚡ Extras del día (info)</div>
         <div class="tb-val">${fmt(gsEx)}</div>
       </div>`:''}
     </div>
@@ -1573,8 +1573,8 @@ function renderResumen() {
     <!-- ======== BLOQUE SEMANAL ======== -->
     <div class="bloque-periodo">
       <div class="periodo-header">
-        <span class="periodo-badge semana">ðŸ“† Semana</span>
-        <span class="periodo-fecha-rango">Ãšltimos 7 dÃ­as Â· ${rangoSemana()}</span>
+        <span class="periodo-badge semana">📆 Semana</span>
+        <span class="periodo-fecha-rango">Últimos 7 días · ${rangoSemana()}</span>
       </div>
 
       <div class="periodo-grid">
@@ -1587,14 +1587,14 @@ function renderResumen() {
           <div class="ps-val">${fmt(gsOpSem)}</div>
         </div>
         <div class="periodo-stat gan ${clsSem}">
-          <div class="ps-lbl">${ganSem>=0?'Ganancia':'PÃ©rdida'}</div>
+          <div class="ps-lbl">${ganSem>=0?'Ganancia':'Pérdida'}</div>
           <div class="ps-val">${fmt(Math.abs(ganSem))}</div>
         </div>
       </div>
 
       <div class="periodo-resultado ${clsSem}">
         <div class="pr-left">
-          <div class="pr-lbl">${ganSem>=0?'GANANCIA SEMANAL':'PÃ‰RDIDA SEMANAL'}</div>
+          <div class="pr-lbl">${ganSem>=0?'GANANCIA SEMANAL':'PÉRDIDA SEMANAL'}</div>
           <div class="pr-estado">${estadoSem}</div>
         </div>
         <div class="pr-val">${fmt(Math.abs(ganSem))}</div>
@@ -1614,9 +1614,9 @@ function renderResumen() {
 
     <div class="divider" style="margin:6px 0 16px"></div>
 
-    <!-- ======== HISTORIAL POR DÃAS ======== -->
+    <!-- ======== HISTORIAL POR DÍAS ======== -->
     <div style="margin-bottom:6px">
-      <div style="font-family:var(--font-h);font-size:18px;font-weight:800;margin-bottom:12px">ðŸ“… Historial</div>
+      <div style="font-family:var(--font-h);font-size:18px;font-weight:800;margin-bottom:12px">📅 Historial</div>
       ${renderHistorialHTML()}
     </div>
 
@@ -1625,7 +1625,7 @@ function renderResumen() {
     <!-- ======== DESGLOSE DE GASTOS ======== -->
     <div class="card">
       <div style="font-size:12px;font-weight:700;color:var(--texto2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px">
-        ðŸ“‹ Desglose de gastos operativos
+        📋 Desglose de gastos operativos
       </div>
       ${breakHTML}
     </div>
@@ -1643,15 +1643,15 @@ function abrirFormNegocio(id) {
     const n = negocios.find(x=>x.id===id);
     document.getElementById('fn-nombre').value = n.nombre;
     document.getElementById('fn-tipo').value   = n.tipo||'';
-    document.getElementById('fn-emoji').value  = n.emoji||'ðŸª';
+    document.getElementById('fn-emoji').value  = n.emoji||'🏪';
     document.getElementById('fn-id').value     = id;
-    document.getElementById('sh-neg-title').textContent = 'âœï¸ Editar Negocio';
+    document.getElementById('sh-neg-title').textContent = '✏️ Editar Negocio';
   } else {
     document.getElementById('fn-nombre').value = '';
     document.getElementById('fn-tipo').value   = '';
-    document.getElementById('fn-emoji').value  = 'ðŸª';
+    document.getElementById('fn-emoji').value  = '🏪';
     document.getElementById('fn-id').value     = '';
-    document.getElementById('sh-neg-title').textContent = 'ðŸª Nuevo Negocio';
+    document.getElementById('sh-neg-title').textContent = '🏪 Nuevo Negocio';
   }
   document.getElementById('ov-negocio').classList.add('open');
   setTimeout(()=>document.getElementById('fn-nombre').focus(),80);
@@ -1662,10 +1662,10 @@ function editarNegocio(id) { abrirFormNegocio(id); }
 function guardarNegocio() {
   const nombre = document.getElementById('fn-nombre').value.trim();
   const tipo   = document.getElementById('fn-tipo').value.trim();
-  const emoji  = document.getElementById('fn-emoji').value.trim()||'ðŸª';
+  const emoji  = document.getElementById('fn-emoji').value.trim()||'🏪';
   const id     = document.getElementById('fn-id').value;
 
-  if (!nombre) { toast('âš ï¸ Escribe el nombre'); return; }
+  if (!nombre) { toast('⚠️ Escribe el nombre'); return; }
 
   if (id) {
     const n = negocios.find(x=>x.id===id);
@@ -1680,13 +1680,13 @@ function guardarNegocio() {
   cerrarOverlays();
   renderNegocios();
   actualizarHeader();
-  toast(id?'âœ… Negocio actualizado':'âœ… Negocio creado');
+  toast(id?'✅ Negocio actualizado':'✅ Negocio creado');
 }
 
 function pedirEliminarNeg(id) {
   const n=negocios.find(x=>x.id===id);
-  confirmar(`Â¿Eliminar "${n?.nombre}"?`,
-    'Se eliminarÃ¡n tambiÃ©n todos sus gastos e ingresos.',
+  confirmar(`¿Eliminar "${n?.nombre}"?`,
+    'Se eliminarán también todos sus gastos e ingresos.',
     ()=>{
       negocios  = negocios.filter(x=>x.id!==id);
       gastos    = gastos.filter(x=>x.negId!==id);
@@ -1696,7 +1696,7 @@ function pedirEliminarNeg(id) {
       guardar('np_gastos',gastos);
       guardar('np_ingresos',ingresos);
       renderNegocios(); actualizarHeader();
-      toast('ðŸ—‘ï¸ Negocio eliminado');
+      toast('🗑️ Negocio eliminado');
     }
   );
 }
@@ -1716,7 +1716,7 @@ function selTipo(tipo) {
 }
 
 function abrirFormGasto(id) {
-  if (!negActivo) { toast('âš ï¸ Selecciona un negocio primero'); return; }
+  if (!negActivo) { toast('⚠️ Selecciona un negocio primero'); return; }
 
   if (id) {
     const g=gastos.find(x=>x.id===id);
@@ -1724,14 +1724,14 @@ function abrirFormGasto(id) {
     document.getElementById('fg-monto').value  = g.monto;
     document.getElementById('fg-dias').value   = g.dias||'';
     document.getElementById('fg-id').value     = id;
-    document.getElementById('sh-gas-title').textContent = 'âœï¸ Editar Gasto';
+    document.getElementById('sh-gas-title').textContent = '✏️ Editar Gasto';
     selTipo(g.tipo||'diario');
   } else {
     document.getElementById('fg-nombre').value = '';
     document.getElementById('fg-monto').value  = '';
     document.getElementById('fg-dias').value   = '';
     document.getElementById('fg-id').value     = '';
-    document.getElementById('sh-gas-title').textContent = 'ðŸ’¸ Agregar Gasto';
+    document.getElementById('sh-gas-title').textContent = '💸 Agregar Gasto';
     selTipo('diario');
   }
   document.getElementById('ov-gasto').classList.add('open');
@@ -1746,9 +1746,9 @@ function guardarGasto() {
   const dias   = parseInt(document.getElementById('fg-dias').value)||1;
   const id     = document.getElementById('fg-id').value;
 
-  if (!nombre) { toast('âš ï¸ Escribe el nombre'); return; }
-  if (isNaN(monto)||monto<=0) { toast('âš ï¸ Escribe un monto vÃ¡lido'); return; }
-  if (tipoGasto==='duracion' && dias<1) { toast('âš ï¸ DuraciÃ³n mÃ­nima: 1 dÃ­a'); return; }
+  if (!nombre) { toast('⚠️ Escribe el nombre'); return; }
+  if (isNaN(monto)||monto<=0) { toast('⚠️ Escribe un monto válido'); return; }
+  if (tipoGasto==='duracion' && dias<1) { toast('⚠️ Duración mínima: 1 día'); return; }
 
   if (id) {
     const g=gastos.find(x=>x.id===id);
@@ -1760,26 +1760,26 @@ function guardarGasto() {
   guardar('np_gastos',gastos);
   cerrarOverlays();
   renderGastos(); actualizarHeader();
-  toast(id?'âœ… Gasto actualizado':'âœ… Gasto agregado');
+  toast(id?'✅ Gasto actualizado':'✅ Gasto agregado');
 }
 
 /* =========================================================
    FORM: INGRESO
 ========================================================= */
 function abrirFormIngreso(id) {
-  if (!negActivo) { toast('âš ï¸ Selecciona un negocio primero'); return; }
+  if (!negActivo) { toast('⚠️ Selecciona un negocio primero'); return; }
 
   if (id) {
     const i=ingresos.find(x=>x.id===id);
     document.getElementById('fi-nombre').value = i.nombre;
     document.getElementById('fi-monto').value  = i.monto;
     document.getElementById('fi-id').value     = id;
-    document.getElementById('sh-ing-title').textContent = 'âœï¸ Editar Ingreso';
+    document.getElementById('sh-ing-title').textContent = '✏️ Editar Ingreso';
   } else {
     document.getElementById('fi-nombre').value = '';
     document.getElementById('fi-monto').value  = '';
     document.getElementById('fi-id').value     = '';
-    document.getElementById('sh-ing-title').textContent = 'ðŸ’µ Agregar Ingreso';
+    document.getElementById('sh-ing-title').textContent = '💵 Agregar Ingreso';
   }
   document.getElementById('ov-ingreso').classList.add('open');
   setTimeout(()=>document.getElementById('fi-nombre').focus(),80);
@@ -1792,8 +1792,8 @@ function guardarIngreso() {
   const monto  = parseFloat(document.getElementById('fi-monto').value);
   const id     = document.getElementById('fi-id').value;
 
-  if (!nombre) { toast('âš ï¸ Escribe la descripciÃ³n'); return; }
-  if (isNaN(monto)||monto<=0) { toast('âš ï¸ Escribe un monto vÃ¡lido'); return; }
+  if (!nombre) { toast('⚠️ Escribe la descripción'); return; }
+  if (isNaN(monto)||monto<=0) { toast('⚠️ Escribe un monto válido'); return; }
 
   if (id) {
     const i=ingresos.find(x=>x.id===id);
@@ -1805,14 +1805,14 @@ function guardarIngreso() {
   guardar('np_ingresos',ingresos);
   cerrarOverlays();
   renderIngresos(); actualizarHeader();
-  toast(id?'âœ… Ingreso actualizado':'âœ… Ingreso agregado');
+  toast(id?'✅ Ingreso actualizado':'✅ Ingreso agregado');
 }
 
 /* =========================================================
    ELIMINAR ITEMS
 ========================================================= */
 function pedirEliminarItem(tipo,id,nombre) {
-  confirmar(`Â¿Eliminar "${nombre}"?`,'Este registro se borrarÃ¡ permanentemente.',()=>{
+  confirmar(`¿Eliminar "${nombre}"?`,'Este registro se borrará permanentemente.',()=>{
     if(tipo==='gasto') {
       gastos=gastos.filter(x=>x.id!==id);
       guardar('np_gastos',gastos);
@@ -1823,21 +1823,21 @@ function pedirEliminarItem(tipo,id,nombre) {
       renderIngresos();
     }
     actualizarHeader();
-    toast('ðŸ—‘ï¸ Eliminado');
+    toast('🗑️ Eliminado');
   });
 }
 
 /* =========================================================
-   NUEVO DÃA
+   NUEVO DÍA
 ========================================================= */
 function pedirNuevoDia() {
-  confirmar('ðŸŒ… Â¿Nuevo dÃ­a?',
-    'Se guardarÃ¡n los ingresos de hoy en el historial y podrÃ¡s empezar desde cero.',
+  confirmar('🌅 ¿Nuevo día?',
+    'Se guardarán los ingresos de hoy en el historial y podrás empezar desde cero.',
     ()=>{
-      // Guardar snapshot del dÃ­a en historial
+      // Guardar snapshot del día en historial
       const hd = fechaHoy();
       const historial = cargar('np_historial', []);
-      // Un snapshot por negocio con ingresos del dÃ­a
+      // Un snapshot por negocio con ingresos del día
       negocios.forEach(neg => {
         const ingDia = ingresos.filter(i=>i.negId===neg.id && (i.fecha||hd)===hd);
         if (ingDia.length > 0) {
@@ -1851,7 +1851,7 @@ function pedirNuevoDia() {
             totalGastos: totalGastosOperativos(neg.id),
             ganancia: totalIngresos(neg.id, hd) - totalGastosOperativos(neg.id)
           };
-          // Reemplaza si ya existe snapshot de ese dÃ­a+negocio
+          // Reemplaza si ya existe snapshot de ese día+negocio
           const idx = historial.findIndex(h=>h.fecha===hd&&h.negId===neg.id);
           if (idx>=0) historial[idx]=snap; else historial.unshift(snap);
         }
@@ -1861,7 +1861,7 @@ function pedirNuevoDia() {
       ingresos = ingresos.filter(i=>(i.fecha||hd)!==hd);
       guardar('np_ingresos',ingresos);
       renderTab(tabActual);
-      toast('ðŸŒ… Â¡Nuevo dÃ­a iniciado! Historial guardado.');
+      toast('🌅 ¡Nuevo día iniciado! Historial guardado.');
     }
   );
 }
@@ -1886,7 +1886,7 @@ function exportarDatos() {
   a.download = `negocio-pro-${new Date().toISOString().slice(0,10)}.json`;
   a.click();
   URL.revokeObjectURL(url);
-  toast('ðŸ“¤ Datos exportados');
+  toast('📤 Datos exportados');
 }
 
 function importarDatos(event) {
@@ -1896,7 +1896,7 @@ function importarDatos(event) {
   reader.onload = e => {
     try {
       const datos = JSON.parse(e.target.result);
-      if (!datos.negocios) throw new Error('Formato invÃ¡lido');
+      if (!datos.negocios) throw new Error('Formato inválido');
       negocios  = datos.negocios  || [];
       gastos    = datos.gastos    || [];
       ingresos  = datos.ingresos  || [];
@@ -1907,9 +1907,9 @@ function importarDatos(event) {
       guardar('np_activo',negActivo);
       if (datos.historial) guardar('np_historial', datos.historial);
       renderTab(tabActual);
-      toast('ðŸ“¥ Datos importados correctamente');
+      toast('📥 Datos importados correctamente');
     } catch {
-      toast('âŒ Archivo invÃ¡lido');
+      toast('❌ Archivo inválido');
     }
     event.target.value='';
   };
